@@ -6,15 +6,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "students")
-public class Students {
+@Table(name = "account")
+public class Account extends AbstractBean<Long> {
 
-    @Id
-    @Column
-    private Long id;
+    private static final long serialVersionUID = 106330414998887438L;
 
     @Column
     private String username;
@@ -24,4 +23,8 @@ public class Students {
 
     @Column
     private Integer classId;
+
+    //role: 2代表学生 1代表老师 0代表管理员
+    @Column
+    private Integer role;
 }

@@ -10,12 +10,9 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "class_to_course")
-public class ClassToCourse {
+public class ClassToCourse extends AbstractBean<Long> {
 
-    @Id
-    @Column
-    private Long id;
-
+    private static final long serialVersionUID = -5740147999321554057L;
     @Column
     private Integer class_id;
 
