@@ -24,6 +24,7 @@ public class AccountServiceImpl extends GeneralServiceImpl<Account, Long> implem
     public void setGeneralRepository(GeneralRepository<Account, Long> generalRepository) {
         this.generalRepository = generalRepository;
         this.accountRepository = (AccountRepository) generalRepository;
+        System.out.println();
     }
 
 }
