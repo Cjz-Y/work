@@ -6,12 +6,18 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/login")
 public class LoginController {
 
-    @RequestMapping("login")
-    public String getLogin(){
+    @RequestMapping("/getPage")
+    public String getPage(){
         return "";
+    }
+
+
+    @RequestMapping("/login")
+    public String login(String username, String password){
+        return null;
     }
 
 
