@@ -27,4 +27,9 @@ public class AccountServiceImpl extends GeneralServiceImpl<Account, Long> implem
         System.out.println();;
     }
 
+    @Override
+    public Account findAccountByUsername(String username) {
+        Account account = accountRepository.findAccountByUsername(username);
+        return account;
+    }
 }
