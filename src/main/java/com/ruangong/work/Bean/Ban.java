@@ -9,8 +9,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "classes")
-public class Class extends AbstractBean<Long> {
+@Table(name = "ban")
+public class Ban extends AbstractBean<Long> {
 
     private static final long serialVersionUID = -8279352715073581855L;
 
