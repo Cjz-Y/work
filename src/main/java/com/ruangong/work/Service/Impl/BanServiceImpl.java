@@ -28,6 +28,13 @@ public class BanServiceImpl extends GeneralServiceImpl<Ban, Long> implements Ban
 
     @Override
     public List<Ban> findAll(){
+
         return banRepository.findAll();
+    }
+
+    @Override
+    public Ban findByName(String name) {
+
+        return banRepository.findByName(name);
     }
 }

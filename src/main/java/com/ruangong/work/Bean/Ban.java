@@ -17,8 +17,6 @@ public class Ban extends AbstractBean<Long> {
     @Column
     private String name;
 
-    @Column
-    private String teacher;
 
 
 }
