@@ -28,4 +28,9 @@ public class CourseServiceImpl extends GeneralServiceImpl<Course, Long> implemen
     public List<Course> findAll(){
         return courseRepository.findAll();
     }
+
+    @Override
+    public Course findbyName(String name) {
+        return courseRepository.findByName(name);
+    }
 }
