@@ -17,11 +17,11 @@ public class Course extends AbstractBean<Long> {
     @Column
     private String name;
 
-    /**
-     * 授课老师
-     */
-    @Column
-    private String teacher;
+//    /**
+//     * 授课老师
+//     */
+//    @Column
+//    private String teacher;
 
 
 }

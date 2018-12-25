@@ -3,6 +3,7 @@ package com.ruangong.work.Controller;
 import com.ruangong.work.Bean.Account;
 import com.ruangong.work.Service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController {
     @Autowired
     private AccountService accountService;
+
+   @GetMapping("test")
+   public String test(){
+       return "test";
+   }
 
     @RequestMapping("/getPage")
     public String getPage(){
