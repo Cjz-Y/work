@@ -30,7 +30,7 @@ public class CourseServiceImpl extends GeneralServiceImpl<Course, Long> implemen
     }
 
     @Override
-    public Course findbyName(String name) {
+    public Course findByName(String name) {
         return courseRepository.findByName(name);
     }
 }

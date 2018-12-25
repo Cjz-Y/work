@@ -10,5 +10,5 @@ public interface CourseService extends GeneralService<Course, Long> {
 
     List<Course> findAll();
 
-    Course findbyName(String name);
+    Course findByName(String name);
 }
