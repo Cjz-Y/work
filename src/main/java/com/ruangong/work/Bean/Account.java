@@ -22,7 +22,7 @@ public class Account extends AbstractBean<Long> {
     private String password;
 
     @Column
-    private Integer classId;
+    private Integer banId;
 
     //role: 2代表学生 1代表老师 0代表管理员
     @Column

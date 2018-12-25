@@ -12,9 +12,9 @@ import java.util.List;
 public interface CourseRepository extends GeneralRepository<Course, Long> {
 
 
-    @Query("select data from course data")
+    @Query("select data from Course data")
     List<Course> findAll();
 
-    @Query("select data from coursr data where data.name = (?1)")
+    @Query("select data from Course data where data.name = (?1)")
     Course findByName(String name);
 }
