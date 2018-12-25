@@ -9,4 +9,6 @@ import java.util.List;
 public interface CourseService extends GeneralService<Course, Long> {
 
     List<Course> findAll();
+
+    Course findbyName(String name);
 }

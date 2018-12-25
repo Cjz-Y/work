@@ -7,4 +7,6 @@ import java.util.List;
 public interface BanService extends GeneralService<Ban, Long> {
 
     List<Ban> findAll();
+
+    Ban findByName(String name);
 }
