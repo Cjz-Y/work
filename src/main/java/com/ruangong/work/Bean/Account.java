@@ -1,6 +1,5 @@
 package com.ruangong.work.Bean;
 
-import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Data
+
 @Entity
 @Table(name = "account")
 public class Account extends AbstractBean<Long> {
@@ -27,4 +26,36 @@ public class Account extends AbstractBean<Long> {
     //role: 2代表学生 1代表老师 0代表管理员
     @Column
     private Integer role;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Integer getBanId() {
+        return banId;
+    }
+
+    public void setBanId(Integer banId) {
+        this.banId = banId;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
 }

@@ -1,13 +1,11 @@
 package com.ruangong.work.Bean;
 
-import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
 @Entity
 @Table(name = "ban")
 public class Ban extends AbstractBean<Long> {
@@ -17,6 +15,25 @@ public class Ban extends AbstractBean<Long> {
     @Column
     private String name;
 
+    /**
+     * 班主任
+     */
+    @Column
+    private String teacher;
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
+    }
 }

@@ -4,11 +4,8 @@ spring:
         username: cim
         password: yansou2016+
         tomcat:
-#            <!-- 最大等待时间. -->
             max-wait: 10000
-#            <!-- 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制  默认值是8 -->
             max-idle: 50
-#            <!-- 连接池的最大值，同一时间可以从池分配的最多连接数量，0时无限制   默认值是8 -->
             max-active: 50
             test-on-borrow: true
             test-while-idle: true
@@ -20,3 +17,24 @@ spring:
                     auto: update
                 show_sql: false
                 current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+
+    #freemarker
+    freemarker:
+        request-context-attribute: request  #req璁块棶request
+        cache: false
+        charset: UTF-8
+        settings:
+            number_format: 0.##   #鏁板瓧鏍煎紡鍖栵紝鏃犲皬鏁扮偣
+#        prefix: classpath:/templates/
+#        suffix: .ftl
+
+#    mvc:
+#        static-path-pattern: /css/**,/js/**
+#    resources:
+#        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/
+
+server:
+    port: 8080
+
+
+

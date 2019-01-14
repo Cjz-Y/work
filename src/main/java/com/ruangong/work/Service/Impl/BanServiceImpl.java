@@ -2,8 +2,9 @@ package com.ruangong.work.Service.Impl;
 
 import com.ruangong.work.Bean.Ban;
 import com.ruangong.work.Repository.BanRepository;
-import com.ruangong.work.Repository.GeneralRepository;
+import com.ruangong.work.Repository.common.GeneralRepository;
 import com.ruangong.work.Service.BanService;
+import com.ruangong.work.Service.common.GeneralServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

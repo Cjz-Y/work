@@ -1,6 +1,7 @@
 package com.ruangong.work.Service;
 
 import com.ruangong.work.Bean.Ban;
+import com.ruangong.work.Service.common.GeneralService;
 
 import java.util.List;
 

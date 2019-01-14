@@ -1,4 +1,4 @@
-package com.ruangong.work.Service;
+package com.ruangong.work.Service.common;
 
 import java.io.Serializable;
 import java.util.List;

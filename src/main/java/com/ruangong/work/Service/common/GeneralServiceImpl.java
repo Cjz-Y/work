@@ -1,7 +1,7 @@
-package com.ruangong.work.Service.Impl;
+package com.ruangong.work.Service.common;
 
-import com.ruangong.work.Repository.GeneralRepository;
-import com.ruangong.work.Service.GeneralService;
+import com.ruangong.work.Bean.AbstractBean;
+import com.ruangong.work.Repository.common.GeneralRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -10,9 +10,10 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
-public abstract class GeneralServiceImpl<T, ID extends Serializable> implements GeneralService<T, ID> {
+public abstract class GeneralServiceImpl<T extends AbstractBean<ID>, ID extends Serializable> implements GeneralService<T, ID> {
 
     protected GeneralRepository<T, ID> generalRepository;
 
@@ -87,7 +88,12 @@ public abstract class GeneralServiceImpl<T, ID extends Serializable> implements 
     @Transactional(readOnly = true)
     @Override
     public T findById(ID id) {
-        return generalRepository.getOne(id);
+        Optional result = generalRepository.findById(id);
+        if (result.isPresent()){
+            return (T) result.get();
+        }   else    {
+            return null;
+        }
     }
 
     @Override

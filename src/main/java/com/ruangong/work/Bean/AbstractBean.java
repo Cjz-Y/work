@@ -8,11 +8,19 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 @MappedSuperclass
-abstract class AbstractBean<ID extends Serializable> implements Serializable {
+public abstract class AbstractBean<ID extends Serializable> implements Serializable {
 
     private static final long serialVersionUID = 1821796981112693433L;
 
     @Id
     @GeneratedValue
     private ID id;
+
+    public ID getId() {
+        return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
+    }
 }

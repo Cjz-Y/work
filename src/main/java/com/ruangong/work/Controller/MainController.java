@@ -54,6 +54,7 @@ public class MainController {
     @RequestMapping("/course/save")
     public String saveCourse(Course course){
         Course result = courseService.save(course);
+
         if (result != null){
             return "回到主页";
         }   else    {

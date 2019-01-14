@@ -5,14 +5,12 @@ import com.ruangong.work.Bean.Ban;
 import com.ruangong.work.Service.AccountService;
 import com.ruangong.work.Service.BanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/login")
 public class LoginController {
     @Autowired
@@ -25,17 +23,15 @@ public class LoginController {
 
     @RequestMapping("/getPage")
     public String getPage(){
-        return "hh";
+        return "login";
     }
 
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String username, String password){
         Account account = accountService.findAccountByUsername(username);
         if (account == null){
-
-            return "username is null";
-
+            return "redirect:/manager/coursePage";
         }   else    {
 
             if (password.equals(account.getPassword())){

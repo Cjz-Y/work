@@ -2,8 +2,9 @@ package com.ruangong.work.Service.Impl;
 
 import com.ruangong.work.Bean.Course;
 import com.ruangong.work.Repository.CourseRepository;
-import com.ruangong.work.Repository.GeneralRepository;
+import com.ruangong.work.Repository.common.GeneralRepository;
 import com.ruangong.work.Service.CourseService;
+import com.ruangong.work.Service.common.GeneralServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

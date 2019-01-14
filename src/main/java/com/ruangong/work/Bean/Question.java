@@ -1,13 +1,11 @@
 package com.ruangong.work.Bean;
 
-import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
 @Entity
 @Table(name = "question")
 public class Question extends AbstractBean<Long>{
@@ -20,4 +18,19 @@ public class Question extends AbstractBean<Long>{
     @Column
     private String questionContent;
 
+    public Integer getCourse_id() {
+        return course_id;
+    }
+
+    public void setCourse_id(Integer course_id) {
+        this.course_id = course_id;
+    }
+
+    public String getQuestionContent() {
+        return questionContent;
+    }
+
+    public void setQuestionContent(String questionContent) {
+        this.questionContent = questionContent;
+    }
 }

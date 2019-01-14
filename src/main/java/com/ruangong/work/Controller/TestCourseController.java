@@ -3,11 +3,12 @@ package com.ruangong.work.Controller;
 import com.ruangong.work.Bean.Course;
 import com.ruangong.work.Service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/testCourse")
 public class TestCourseController {
 
@@ -30,5 +31,10 @@ public class TestCourseController {
     public Integer delete(Long id){
         Integer count = courseService.deleteById(id);
         return count;
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String indexPage(){
+        return "login";
     }
 }
