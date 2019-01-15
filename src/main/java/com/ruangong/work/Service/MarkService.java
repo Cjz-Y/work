@@ -13,4 +13,6 @@ public interface MarkService extends GeneralService<Mark, Long> {
 
     List<Map<String, Object>> findMarkByCourseIdAndBanId(Integer courseId, Integer banId);
 
+    List<Map<String, Object>> getMarkByStudentId(Integer studentId);
+
 }

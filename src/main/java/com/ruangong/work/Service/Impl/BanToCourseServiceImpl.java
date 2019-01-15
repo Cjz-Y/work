@@ -1,5 +1,6 @@
 package com.ruangong.work.Service.Impl;
 
+import com.ruangong.work.Bean.Ban;
 import com.ruangong.work.Bean.BanToCourse;
 import com.ruangong.work.Bean.Course;
 import com.ruangong.work.Repository.BanToCourseRepository;
@@ -30,6 +31,18 @@ public class BanToCourseServiceImpl extends GeneralServiceImpl<BanToCourse, Long
     @Override
     public List<Course> findNoSelectedCourse(Integer banId){
         List<Course> result = banToCourseRepository.findNoSelectedCourse(banId);
+        return result;
+    }
+
+    @Override
+    public List<Ban> findSelectedBanByCourse(Integer courseId){
+        List<Ban> result = banToCourseRepository.findSelectedBanByCourse(courseId);
+        return result;
+    }
+
+    @Override
+    public List<Ban> findNoSelectedBanByCourse(Integer courseId){
+        List<Ban> result = banToCourseRepository.findNoSelectedBanByCourse(courseId);
         return result;
     }
 }

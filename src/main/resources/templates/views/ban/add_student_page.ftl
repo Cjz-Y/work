@@ -56,23 +56,14 @@
 
 <div class="tpl-page-container tpl-page-header-fixed">
 
-    <div class="tpl-content-scope">
-        <div class="note note-info">
-            <h3>${(course.name)!""}
-                <span class="close" data-close="note"></span>
-            </h3>
-            <p> ${(course.teacher)!""}</p>
-            <p><span class="label label-danger">简介:</span> ${(course.describe)!""}
-            </p>
-        </div>
-    </div>
+    <input type="hidden" id="ban_id" name="ban_id" value="${(banId)!''}">
 
     <div class="tpl-content-wrapper-hover">
 
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 新增班级
+                    <span class="am-icon-code"></span> 新增学生
                 </div>
             </div>
             <div class="tpl-block ">
@@ -81,20 +72,27 @@
 
 
                     <div class="am-u-sm-12 am-u-md-9">
-                        <form class="am-form am-form-horizontal" action="/manager/saveBan" method="post">
+                        <form class="am-form am-form-horizontal" action="/ban/addStudent" method="post">
                             <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">班级名称</label>
+                                <label for="user-name" class="am-u-sm-3 am-form-label">学生登录名</label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" id="user-name" placeholder="" name="name">
-                                    <small>输入班级名称。</small>
+                                    <input type="text" id="username" placeholder="" name="username">
+                                    <small>请输入学生登录名称。</small>
                                 </div>
                             </div>
 
                             <div class="am-form-group">
-                                <label for="user-email" class="am-u-sm-3 am-form-label">班主任</label>
+                                <label for="user-email" class="am-u-sm-3 am-form-label">学生登录密码</label>
                                 <div class="am-u-sm-9">
-                                    <input type="text" id="teacher" placeholder="" name="teacher">
-                                    <small>请输入班主任。</small>
+                                    <input type="password" id="password" placeholder="" name="password" value="123456" p>
+                                    <small>请输入学生登录的密码,默认密码为123456。</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label for="user-email" class="am-u-sm-3 am-form-label">学生班级</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" id="banId" placeholder="" name="banId" value="${banId}" disabled p>
                                 </div>
                             </div>
 
@@ -103,6 +101,9 @@
                                     <button type="submit" class="am-btn am-btn-primary">保存</button>
                                 </div>
                             </div>
+
+                            <input type="hidden" id="banId" name="banId" value="${banId}" />
+                            <input type="hidden" id="role" name="role" value="2" />
                         </form>
                     </div>
                 </div>

@@ -4,26 +4,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
     <meta name="description" content="这是一个 index 页面">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="icon" type="image/png" href="/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <link rel="stylesheet" href="/css/amazeui.min.css"/>
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="/css/amazeui.min.css" />
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/amazeui.datatables.css"/>
 </head>
 
 <body data-type="generalComponents">
 
 
 <header class="am-topbar am-topbar-inverse admin-header">
-
     <div class="am-topbar-brand">
         <p>管理员页面</p>
     </div>
@@ -52,8 +49,12 @@
 </header>
 
 
-<div class="tpl-page-container tpl-page-header-fixed">
 
+
+
+
+
+<div class="tpl-page-container tpl-page-header-fixed">
 
     <div class="tpl-left-nav tpl-left-nav-hover">
         <div class="tpl-left-nav-title">
@@ -62,16 +63,16 @@
         <div class="tpl-left-nav-list">
             <ul class="tpl-left-nav-menu">
                 <li class="tpl-left-nav-item">
-                    <a href="/manager/coursePage" class="nav-link tpl-left-nav-link-list">
+                    <a href="/course/courseToBan?courseId=${(course.id)!''}" class="nav-link tpl-left-nav-link-list">
                         <i class="am-icon-bar-chart"></i>
-                        <span>课程列表</span>
+                        <span>选课班级列表</span>
                     </a>
                 </li>
 
                 <li class="tpl-left-nav-item">
-                    <a href="/manager/banPage" class="nav-link tpl-left-nav-link-list active">
+                    <a href="/course/courseEva?courseId=${(course.id)!''}" class="nav-link tpl-left-nav-link-list active">
                         <i class="am-icon-table"></i>
-                        <span>班级列表</span>
+                        <span>课程评价列表</span>
                     </a>
                 </li>
             </ul>
@@ -79,27 +80,30 @@
     </div>
 
 
+
     <div class="tpl-content-wrapper">
+
+        <div class="tpl-content-scope">
+            <div class="note note-info">
+                <h3>${(course.name)!""}
+                    <span class="close" data-close="note"></span>
+                </h3>
+                <p> ${(course.teacher)!""}</p>
+                <p><span class="label label-danger">简介:</span> ${(course.describeText)!""}
+                </p>
+            </div>
+            <input type="hidden" id="course_id" name="course_id" value="${(course.id)!''}">
+
+        </div>
+
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 班级列表
+                    <span class="am-icon-code"></span> 课程评价列表
                 </div>
-
-
             </div>
-            <div class="tpl-block">
-                <div class="am-g">
-                    <div class="am-u-sm-12 am-u-md-6">
-                        <div class="am-btn-toolbar">
-                            <div class="am-btn-group am-btn-group-xs">
-                                <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.location.href='/manager/addBanPage'"><span
-                                            class="am-icon-plus"></span> 新增
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="tpl-block ">
+
                 <div class="am-g">
                     <div class="am-u-sm-12">
                         <form class="am-form">
@@ -107,7 +111,11 @@
                                 <thead>
                                 <tr>
                                     <th>班级名称</th>
-                                    <th>班主任</th>
+                                    <th>问题一得分</th>
+                                    <th>问题二得分</th>
+                                    <th>问题三得分</th>
+                                    <th>问题四得分</th>
+                                    <th>问题五得分</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -118,12 +126,14 @@
 
                 </div>
             </div>
-            <div class="tpl-alert"></div>
+
         </div>
+
 
     </div>
 
 </div>
+
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/amazeui.min.js"></script>
@@ -132,25 +142,43 @@
 <script src="/js/amazeui.datatables.min.js"></script>
 
 <script>
+    var bandict = eval("("+'${banDict}'+")");
     $(document).ready(function() {
         $('#example').DataTable({
-            // "processing": false,
-            "serverSide": false,
             "ajax": {
-                "url": "/manager/getAllBan",
-                "type": "POST"
+                "url": "/course/showCourseMark",
+                "type": "POST",
+                data:{
+                    "courseId": $("#course_id").val(),
+                }
             },
             "columnDefs": [
                 {
-                    "data": "name",
+                    "data": "ban_name",
                     "targets": 0,
                     "render": function (data, type, full, meta) {
-                        return "<a href='/ban/ban?banId="+full.id+"'>" + data + "</a>";
+                        return "<a href='/course/courseDetail?courseId="+$("#course_id").val()+"&banId="+data+"'>" + bandict[data] + "</a>";
                     }
                 },
                 {
-                    "data": "teacher",
-                    "targets": 1,
+                    "data": "question_one_mark",
+                    "targets": 1
+                },
+                {
+                    "data": "question_two_mark",
+                    "targets": 2
+                },
+                {
+                    "data": "question_three_mark",
+                    "targets": 3
+                },
+                {
+                    "data": "question_four_mark",
+                    "targets": 4
+                },
+                {
+                    "data": "question_five_mark",
+                    "targets": 5
                 },
             ]
         } );

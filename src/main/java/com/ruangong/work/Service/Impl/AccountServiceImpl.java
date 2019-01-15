@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @Service("accountService")
 public class AccountServiceImpl extends GeneralServiceImpl<Account, Long> implements AccountService {
@@ -30,5 +32,11 @@ public class AccountServiceImpl extends GeneralServiceImpl<Account, Long> implem
     public Account findAccountByUsername(String username) {
         Account account = accountRepository.findAccountByUsername(username);
         return account;
+    }
+
+    @Override
+    public List<Account> findStudentsByBanId(Integer banId){
+        List<Account> result = accountRepository.findStudentByBanId(banId);
+        return result;
     }
 }

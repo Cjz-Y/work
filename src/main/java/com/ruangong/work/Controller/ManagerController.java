@@ -29,26 +29,46 @@ public class ManagerController {
     @Autowired
     private MarkService markService;
 
+    /**
+     * 展示管理员的课程管理页面
+     * @return
+     */
     @RequestMapping(value = "/coursePage", method = RequestMethod.GET)
     public String getCoursePage(){
         return "views/manager/course_page";
     }
 
+    /**
+     * 展示管理员的班级管理页面
+     * @return
+     */
     @RequestMapping(value = "/banPage", method = RequestMethod.GET)
     public String getBanPage(){
         return "views/manager/ban_page";
     }
 
+    /**
+     * 展示添加课程页面
+     * @return
+     */
     @RequestMapping(value = "/addCoursePage", method = RequestMethod.GET)
     public String getAddCoursePage(){
         return "views/manager/add_cour_page";
     }
 
+    /**
+     * 展示添加班级页面
+     * @return
+     */
     @RequestMapping(value = "/addBanPage", method = RequestMethod.GET)
     public String getAddBanPage(){
         return "views/manager/add_ban_page";
     }
 
+    /**
+     * 课程列表数据
+     * @return
+     */
     @RequestMapping(value = "/getAllCourse", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> getAllCourse(){
@@ -58,6 +78,10 @@ public class ManagerController {
         return result;
     }
 
+    /**
+     * 班级列表数据
+     * @return
+     */
     @RequestMapping(value = "/getAllBan", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> getAllBan(){
@@ -67,6 +91,11 @@ public class ManagerController {
         return result;
     }
 
+    /**
+     * 保存课程
+     * @param course
+     * @return
+     */
     @RequestMapping(value = "/saveCourse", method = RequestMethod.POST)
     public String saveCourse(Course course){
         Course course1 = courseService.save(course);
@@ -76,6 +105,11 @@ public class ManagerController {
         return null;
     }
 
+    /**
+     * 保存班级
+     * @param ban
+     * @return
+     */
     @RequestMapping(value = "/saveBan", method = RequestMethod.POST)
     public String saveBan(Ban ban){
         Ban ban1 = banService.save(ban);

@@ -143,7 +143,7 @@
                     "data": "name",
                     "targets": 0,
                     "render": function (data, type, full, meta) {
-                        return "<a href='/course/course?courseId="+full.id+"'>" + data + "</a>";
+                        return "<a href='/course/courseEva?courseId="+full.id+"'>" + data + "</a>";
                     }
                 },
                 {

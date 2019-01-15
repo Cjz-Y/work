@@ -7,6 +7,7 @@ import com.ruangong.work.Service.BanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password){
+    public String login(String username, String password, RedirectAttributes redirectAttributes){
         Account account = accountService.findAccountByUsername(username);
         if (account == null){
             return "redirect:/manager/coursePage";
@@ -36,9 +37,10 @@ public class LoginController {
 
             if (password.equals(account.getPassword())){
                 if (account.getRole() == 2){
-                    return "student";
+                    redirectAttributes.addAttribute("studentId", account.getId());
+                    return "redirect:/student/courseNoEva";
                 }   else if (account.getRole() == 0) {
-                    return "admin";
+                    return "redirect:/manager/coursePage";
                 }
             }   else    {
                 return "password is wrong";

@@ -11,4 +11,6 @@ public interface CourseService extends GeneralService<Course, Long> {
     List<Course> findAll();
 
     Course findbyName(String name);
+
+    List<Course> findNoEvaCourseByStudent(Integer banId, Integer studentId);
 }

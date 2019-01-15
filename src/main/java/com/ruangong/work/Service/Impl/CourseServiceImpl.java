@@ -34,4 +34,10 @@ public class CourseServiceImpl extends GeneralServiceImpl<Course, Long> implemen
     public Course findbyName(String name) {
         return courseRepository.findByName(name);
     }
+
+    @Override
+    public List<Course> findNoEvaCourseByStudent(Integer banId, Integer studentId){
+        List<Course> result = courseRepository.findNoEvaCourseByStudent(banId, studentId);
+        return result;
+    }
 }

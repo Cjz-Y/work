@@ -16,6 +16,4 @@ public interface BanRepository extends GeneralRepository<Ban, Long> {
     @Query("select data from Ban data")
     List<Ban> findAll();
 
-
-
 }

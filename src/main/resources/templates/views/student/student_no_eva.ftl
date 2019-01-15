@@ -56,25 +56,40 @@
 
 <div class="tpl-page-container tpl-page-header-fixed">
 
-    <div class="tpl-content-scope">
-        <div class="note note-info">
-            <h3>${(course.name)!""}
-                <span class="close" data-close="note"></span>
-            </h3>
-            <p> ${(course.teacher)!""}</p>
-            <p><span class="label label-danger">简介:</span> ${(course.describeText)!""}
-            </p>
-        </div>
-        <input type="hidden" id="course_id" name="course_id" value="${(course.id)!''}">
+    <input type="hidden" id="student_id" name="student_id" value="${(student.id)!''}">
+    <input type="hidden" id="ban_id" name="ban_id" value="${(student.banId)!''}">
 
+    <div class="tpl-left-nav tpl-left-nav-hover">
+        <div class="tpl-left-nav-title">
+            管理列表
+        </div>
+        <div class="tpl-left-nav-list">
+            <ul class="tpl-left-nav-menu">
+                <li class="tpl-left-nav-item">
+                    <a href="/student/courseNoEva/?studentId=${(student.id)!''}" class="nav-link tpl-left-nav-link-list active">
+                        <i class="am-icon-bar-chart"></i>
+                        <span>未评价课程列表</span>
+                    </a>
+                </li>
+
+                <li class="tpl-left-nav-item">
+                    <a href="/student/courseEva?studentId=${(student.id)!''}" class="nav-link tpl-left-nav-link-list">
+                        <i class="am-icon-table"></i>
+                        <span>已评价课程列表</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div class="tpl-content-wrapper-hover">
+
+
+    <div class="tpl-content-wrapper">
 
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 课程评价列表
+                    <span class="am-icon-code"></span> 未评价课程列表
                 </div>
             </div>
             <div class="tpl-block ">
@@ -85,12 +100,9 @@
                             <table id="example" class="am-table am-table-striped am-table-bordered am-table-compact">
                                 <thead>
                                 <tr>
-                                    <th>班级名称</th>
-                                    <th>评价问题一</th>
-                                    <th>评价问题二</th>
-                                    <th>评价问题三</th>
-                                    <th>评价问题四</th>
-                                    <th>评价问题五</th>
+                                    <th>课程名称</th>
+                                    <th>任课老师</th>
+                                    <th>评价</th>
                                 </tr>
                                 </thead>
                             </table>
@@ -117,44 +129,36 @@
 <script src="/js/amazeui.datatables.min.js"></script>
 
 <script>
-    var bandict = eval("("+'${banDict}'+")");
     $(document).ready(function() {
         $('#example').DataTable({
             "ajax": {
-                "url": "/course/showCourseMark",
+                "url": "/student/showNoEvaCourse",
                 "type": "POST",
                 data:{
-                    "courseId": $("#course_id").val(),
+                    "studentId": $("#student_id").val(),
+                    "banId": $("#ban_id").val(),
                 }
             },
             "columnDefs": [
                 {
-                    "data": "ban_name",
+                    "data": "name",
                     "targets": 0,
-                    "render": function (data, type, full, meta) {
-                        return bandict[data];
-                    }
                 },
                 {
-                    "data": "question_one_mark",
+                    "data": "teacher",
                     "targets": 1
                 },
                 {
-                    "data": "question_two_mark",
-                    "targets": 2
+                    "data": "id",
+                    "targets": 2,
+                    "render": function(data, type, full, meta){
+                        return '<a href="/student/evaCourse?studentId='
+                            + $("#student_id").val()
+                            + '&courseId=' + data
+                            + '" class="am-btn am-btn-primary am-round">&nbsp;&nbsp;评价&nbsp;&nbsp;</a>&nbsp;&nbsp;'
+                    }
                 },
-                {
-                    "data": "question_three_mark",
-                    "targets": 3
-                },
-                {
-                    "data": "question_four_mark",
-                    "targets": 4
-                },
-                {
-                    "data": "question_five_mark",
-                    "targets": 5
-                },
+
             ]
         } );
     } );

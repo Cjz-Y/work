@@ -53,4 +53,11 @@ public class MarkServiceImpl extends GeneralServiceImpl<Mark, Long> implements M
         result = markRepository.getMarkByCourseIdAndBanId(courseId, banId);
         return result;
     }
+
+    @Override
+    public List<Map<String, Object>> getMarkByStudentId(Integer studentId){
+        List<Map<String, Object>> result = new ArrayList<>();
+        result = markRepository.getMarkByStudentId(studentId);
+        return result;
+    }
 }

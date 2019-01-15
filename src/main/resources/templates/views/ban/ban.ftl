@@ -56,55 +56,64 @@
 
 <div class="tpl-page-container tpl-page-header-fixed">
 
-    <div class="tpl-content-scope">
-        <div class="note note-info">
-            <h3>${(course.name)!""}
-                <span class="close" data-close="note"></span>
-            </h3>
-            <p> ${(course.teacher)!""}</p>
-            <p><span class="label label-danger">简介:</span> ${(course.describe)!""}
-            </p>
-        </div>
-    </div>
 
     <div class="tpl-content-wrapper-hover">
+
+        <div class="tpl-content-scope">
+            <div class="note note-info">
+                <h3>${(ban.name)!""}
+                    <span class="close" data-close="note"></span>
+                </h3>
+                <p> ${(ban.teacher)!""}</p>
+                <#--<p><span class="label label-danger">简介:</span> ${(course.describeText)!""}-->
+                </p>
+            </div>
+            <input type="hidden" id="ban_id" name="ban_id" value="${(ban.id)!''}">
+
+        </div>
 
         <div class="tpl-portlet-components">
             <div class="portlet-title">
                 <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 新增班级
+                    <span class="am-icon-code"></span> 学生名单
                 </div>
             </div>
+
+            <div class="am-g">
+                <div class="am-u-sm-12 am-u-md-6">
+                    <div class="am-btn-toolbar">
+                        <div class="am-btn-group am-btn-group-xs">
+                            <button type="button" class="am-btn am-btn-default am-btn-success" onclick="window.location.href='/ban/addStudentPage?banId=${ban.id}'">
+                                <span class="am-icon-plus"></span> 新增
+                            </button>
+
+                            <input id="upload" style="display: none;" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" type="file"  class="btn btn-w-m btn-success" <#--href="/componentsExport/add"-->>
+                            <button type="button" class="am-btn am-btn-default am-btn-success" id="import">
+                                <span class="am-icon-plus"></span> 导入
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="tpl-block ">
 
-                <div class="am-g tpl-amazeui-form">
+                <div class="am-g">
+                    <div class="am-u-sm-12">
+                        <form class="am-form">
+                            <table id="example" class="am-table am-table-striped am-table-bordered am-table-compact">
+                                <thead>
+                                <tr>
+                                    <th>学生名称</th>
+                                </tr>
+                                </thead>
+                            </table>
+                            <hr>
 
-
-                    <div class="am-u-sm-12 am-u-md-9">
-                        <form class="am-form am-form-horizontal" action="/manager/saveBan" method="post">
-                            <div class="am-form-group">
-                                <label for="user-name" class="am-u-sm-3 am-form-label">班级名称</label>
-                                <div class="am-u-sm-9">
-                                    <input type="text" id="user-name" placeholder="" name="name">
-                                    <small>输入班级名称。</small>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group">
-                                <label for="user-email" class="am-u-sm-3 am-form-label">班主任</label>
-                                <div class="am-u-sm-9">
-                                    <input type="text" id="teacher" placeholder="" name="teacher">
-                                    <small>请输入班主任。</small>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group">
-                                <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="submit" class="am-btn am-btn-primary">保存</button>
-                                </div>
-                            </div>
                         </form>
                     </div>
+
                 </div>
             </div>
 
@@ -119,6 +128,54 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/amazeui.min.js"></script>
 <script src="/js/app.js"></script>
+
+<script src="/js/amazeui.datatables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "ajax": {
+                "url": "/ban/showStudent",
+                "type": "POST",
+                data:{
+                    "banId": $("#ban_id").val(),
+                }
+            },
+            "columnDefs": [
+                {
+                    "data": "username",
+                    "targets": 0,
+                },
+            ]
+        } );
+    } );
+
+    $(function () {
+        $('#import').on('click', function () {
+            $('#upload').trigger('click');
+        });
+        $('#upload').on('change', function () {
+            var formData = new FormData();
+            formData.append('file', $('#upload')[0].files[0]);
+            $.ajax({
+                url: '/ban/uploadExcelData',
+                type: 'POST',
+                data: formData,                    // 上传formdata封装的数据
+                cache: false,                      // 不缓存
+                processData: false,                // jQuery不要去处理发送的数据
+                contentType: false,                // jQuery不要去设置Content-Type请求头
+            }).done(function(data) {
+                if (data == 'success') {
+                    alert("上传成功，正在处理数据，请稍后刷新页面");
+                }else {
+                    alert("上传失败，请稍后重试");
+                }
+                console.log(data);
+            });
+        });
+    });
+</script>
+
 </body>
 
 </html>
